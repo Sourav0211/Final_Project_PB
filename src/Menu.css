@@ -1,0 +1,27 @@
+.NavBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4bc0c066; /* You can adjust the background color as needed */
+    padding: 10px;
+  }
+  
+  .NavBar ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .NavBar li {
+    margin-right: 10px;
+    color: rgb(0, 0, 0); /* You can adjust the text color as needed */
+    cursor: pointer;
+  }
+  
+  #navbutton {
+    text-decoration: none;
+    color: #000000; /* You can adjust the link text color as needed */
+    cursor: pointer;
+  }
+  

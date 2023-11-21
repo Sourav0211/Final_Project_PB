@@ -1,0 +1,71 @@
+
+
+  
+  
+  .auth-form-container {
+      
+    text-align: center;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: top;  
+    color: #000000;
+  }
+
+
+.auth-form-container, .login-form{
+      display: flex;
+      flex-direction: column;
+    }
+    
+/* @media screen and (min-width: 600px) {
+  .auth-form-container {
+        
+        padding: 0;
+        border: 1px solid white;
+        border-radius: 10px;
+        margin: 0;
+      }
+    }  */
+  
+  label {
+    text-align: left;
+    padding: 0.25rem 0;
+    color: #000000;
+  }
+  
+  input {
+    margin: 0.5rem 0;
+    padding: 1rem;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 10px;
+  }
+  
+  button {
+  
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    margin: 0.5rem 0;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: #000000;
+    cursor: pointer;
+    color: #000000;
+  }
+  
+  .link-btn {
+    border: none;
+    background: none;
+    color: rgb(0, 0, 0);
+    text-decoration: underline;
+  }
+
+  .register-form
+  {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  

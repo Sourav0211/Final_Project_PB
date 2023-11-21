@@ -1,0 +1,65 @@
+.Put-Budget{
+    justify-content: auto;
+    border: 1px ;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color:#4bc0c066;
+    padding-right: 65rem;
+    padding-left: 2rem;
+    margin: auto;
+    
+}
+
+.bar-chart
+{
+    margin: auto;
+    justify-content: auto;
+    padding-bottom: 10rem;
+    padding-right: 55rem;
+   
+
+
+}
+
+body.overlay{
+    background: #989898;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+
+.bgpopup, .popup
+{
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position:fixed;
+}
+
+.popup{
+    background: #313131cc;
+}
+
+.popup-content{
+    content: center;
+    margin: center;
+    position: absolute;
+    top: 40%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    background: #4bc0c066;
+    padding-right: 20px;
+    padding-left: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    min-width: 300px;
+}
