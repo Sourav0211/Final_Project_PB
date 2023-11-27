@@ -67,3 +67,7 @@ button {
   flex-direction: column;
 
 }
+.Warning
+{
+  color: red;
+}

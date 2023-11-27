@@ -9,6 +9,7 @@ export const Login = (props) => {
     const [pass, setPass] = useState('');
     const [authUser, setAuthUser] = useState(null); 
     const [tokenExpiration, setTokenExpiration] = useState(null);
+    const [status ,setStatus] = useState(null);
 
     const Login = (e) => {
        e.preventDefault();
@@ -22,7 +23,22 @@ export const Login = (props) => {
 
        }).catch((error) => {
         console.log(error);
+        if(error.code === 'auth/network-request-failed')
+        {
+            setStatus('Invalid-User');
+        }
        })
+    }
+
+
+    const putMessage = () => {
+        if (status === 'Invalid-User') {
+            return (
+                <p>
+                Invalid Email or Password
+                </p>
+            );
+        }
     }
 
 
@@ -99,13 +115,15 @@ export const Login = (props) => {
                 <button classNAme="login-button" type="submit">Log In</button>
             </form>
             <button className="link-btn" onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</button>
+            <div className="Warning">
+                {putMessage()}
+            </div>
         </div>
+        
     )
 }
 
 export default Login;
-
-
 
 
 
