@@ -10,10 +10,6 @@ export const Register = (props) => {
     const [Status, setStatus] = useState(null);
 
 
-
-
-
-    
     const handleRegistration = async (e) => {
         e.preventDefault();
         try {

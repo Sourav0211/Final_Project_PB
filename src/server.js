@@ -1,6 +1,7 @@
 const express = require('express');
 const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, addDoc, getDocs } = require('@firebase/firestore');
+const { getFirestore, collection, addDoc, getDocs
+,query,where } = require('@firebase/firestore');
 
 const cors = require('cors');
 
@@ -27,11 +28,11 @@ app.use(express.json());
 
 // Endpoint to add a new budget
 app.post('/api/budget', async (req, res) => {
-  const { userUID, category, value } = req.body;
+  const { userUID,month, category, value } = req.body;
   const budgetCollectionRef = collection(db, "Test", userUID, "Budget");
 
   try {
-    const docRef = await addDoc(budgetCollectionRef, { category, value });
+    const docRef = await addDoc(budgetCollectionRef, { month, category, value });
     res.status(201).json({ success: true, id: docRef.id });
   } catch (error) {
     console.error(error);
@@ -42,12 +43,20 @@ app.post('/api/budget', async (req, res) => {
 // Endpoint to get budget data
 app.get('/api/budget/:userUID', async (req, res) => {
   const { userUID } = req.params;
+  const { month } = req.query;
   const budgetCollectionRef = collection(db, "Test", userUID, "Budget");
 
   try {
-    const data = await getDocs(budgetCollectionRef);
-    const budgetData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    res.status(200).json({ success: true, data: budgetData });
+    let data;
+    if (month) {
+        const querySnapshot = await getDocs(query(budgetCollectionRef, where("month", "==", month)));
+      data = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    } else {
+        const querySnapshot = await getDocs(budgetCollectionRef);
+      data = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    }
+
+    res.status(200).json({ success: true, data });
   } catch (error) {
     console.error(error);
     res.status(500).json({ success: false, error: "Internal Server Error" });

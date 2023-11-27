@@ -5,7 +5,7 @@ import './Dashboard.css';
 import Menu from "./Menu";
 import Popup from "./Popup";
 import Chart from 'chart.js/auto';
-
+import MonthDropdown from "./MonthDropdown";
 const Dashboard = ({ authUser, userSignOut }) => {
 
   const [newCategory, setNewCategory] = useState("");
@@ -13,20 +13,29 @@ const Dashboard = ({ authUser, userSignOut }) => {
   const [budgetData, setBudgetData] = useState([]);
   const [chartData, setChartData] = useState({});
   const [timeoutPopup, setTimeoutPopup] = useState(false);
+  const [selectedMonth, setSelectedMonth] = useState("");
   const timeoutDuration = 5 * 50 * 1000;
   const userUID = authUser.uid;
 
   const apiUrl = "http://localhost:3001/api/budget";
 
   useEffect(() => {
-    const checkAndCreateCollection = async () => {
+    const fetchDataAndSetChart = async () => {
       try {
         const response = await fetch(`${apiUrl}/${userUID}`);
         const data = await response.json();
-
+  
         if (response.ok) {
           setBudgetData(data.data);
-          setChartData(prepareChartData(data.data));
+  
+          if (selectedMonth) {
+            
+            const filteredData = data.data.filter(item => item.month === selectedMonth);
+            setChartData(prepareChartData(filteredData));
+          } else {
+            
+            setChartData(prepareChartData(data.data));
+          }
         } else {
           console.error("Error fetching budget data");
         }
@@ -34,8 +43,10 @@ const Dashboard = ({ authUser, userSignOut }) => {
         console.error("Error fetching budget data:", error);
       }
     };
-    checkAndCreateCollection();
-  }, [userUID]);
+  
+    fetchDataAndSetChart();
+  }, [userUID, selectedMonth]);
+  
 
   const createBudget = async () => {
     try {
@@ -46,12 +57,14 @@ const Dashboard = ({ authUser, userSignOut }) => {
         },
         body: JSON.stringify({
           userUID,
+          month: selectedMonth,
           category: newCategory,
           value: Number(newBudget),
         }),
       });
 
       if (response.ok) {
+        setSelectedMonth("");
         setNewCategory("");
         setNewBudget("");
         setTimeoutPopup(false);
@@ -77,8 +90,9 @@ const Dashboard = ({ authUser, userSignOut }) => {
   }, [budgetData]);
 
   const prepareChartData = (data) => {
+    const filteredData = data.filter(item => item.month === selectedMonth);
     return {
-      labels: data.map(item => item.category),
+      labels: filteredData.map(item => item.category),
       datasets: [
         {
           label: 'Budget Amount',
@@ -87,7 +101,7 @@ const Dashboard = ({ authUser, userSignOut }) => {
           borderWidth: 1,
           hoverBackgroundColor: '#4bc0c099',
           hoverBorderColor: '#4bc0c0',
-          data: data.map(item => item.value),
+          data: filteredData.map(item => item.value),
         },
       ],
     };
@@ -109,6 +123,11 @@ const Dashboard = ({ authUser, userSignOut }) => {
       </div>
 
       <div className='Put-Budget'>
+
+
+
+      <label>Month</label>
+      <MonthDropdown selectedMonth={selectedMonth} onChange={setSelectedMonth}></MonthDropdown>
         <label>Category</label>
         <input placeholder="put your category" value={newCategory} onChange={(e) => { setNewCategory(e.target.value) }}></input>
         <label>Budget</label>
@@ -117,7 +136,7 @@ const Dashboard = ({ authUser, userSignOut }) => {
       </div>
 
       <div className='bar-chart'>
-  {Object.keys(chartData).length > 0 && (
+    {  Object.keys(chartData).length > 0 && (
     <Bar data={chartData} options={{}} />
   )}
 </div>
