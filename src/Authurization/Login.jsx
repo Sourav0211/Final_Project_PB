@@ -1,8 +1,9 @@
 import React, { useState,useEffect } from "react";
-import {auth} from "./firebase"
+import {auth} from "../firebase.js"
 import { signInWithEmailAndPassword,signOut,onAuthStateChanged  } from "firebase/auth";
 import './Login.css';
-import Dashboard from "./Dashboard";
+import Dashboard from "../Dashboard/Dashboard.jsx";
+import Menu from "../Menu/Menu.jsx";
 
 export const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -96,7 +97,13 @@ export const Login = (props) => {
 
 
     if (authUser) {
-        return (<Dashboard authUser={authUser} userSignOut={userSignOut}/>)
+        return (
+        
+        
+        <div>
+        <Dashboard authUser={authUser} userSignOut={userSignOut} />
+        </div>
+        )
       }
 
 

@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from "react";
 import './App.css';
-import Login from "./Login";
-import Register from "./Register";
+import Login from "./Authurization/Login"
+import Register from "./Authurization/Register"
 import { onAuthStateChanged } from "firebase/auth";
 import {auth } from "./firebase";
 

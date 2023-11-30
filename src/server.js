@@ -28,11 +28,11 @@ app.use(express.json());
 
 // Endpoint to add a new budget
 app.post('/api/budget', async (req, res) => {
-  const { userUID,month, category, value } = req.body;
+  const { userUID, month, category, value, value2 } = req.body;
   const budgetCollectionRef = collection(db, "Test", userUID, "Budget");
 
   try {
-    const docRef = await addDoc(budgetCollectionRef, { month, category, value });
+    const docRef = await addDoc(budgetCollectionRef, { month, category, value, value2 });
     res.status(201).json({ success: true, id: docRef.id });
   } catch (error) {
     console.error(error);
@@ -49,10 +49,10 @@ app.get('/api/budget/:userUID', async (req, res) => {
   try {
     let data;
     if (month) {
-        const querySnapshot = await getDocs(query(budgetCollectionRef, where("month", "==", month)));
+      const querySnapshot = await getDocs(query(budgetCollectionRef, where("month", "==", month)));
       data = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     } else {
-        const querySnapshot = await getDocs(budgetCollectionRef);
+      const querySnapshot = await getDocs(budgetCollectionRef);
       data = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     }
 
@@ -63,6 +63,23 @@ app.get('/api/budget/:userUID', async (req, res) => {
   }
 });
 
+
+
+// Endpoint to fecth data without a month filter
+app.get('/api/linechart/:userUID', async (req, res) => {
+  const { userUID } = req.params;
+  const budgetCollectionRef = collection(db, "Test", userUID, "Budget");
+
+  try {
+    const querySnapshot = await getDocs(budgetCollectionRef);
+    const data = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+
+    res.status(200).json({ success: true, data });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+});
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
