@@ -68,4 +68,35 @@
   }
   
   
-  
+
+  .Bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Add this to make sure it covers the full height of the viewport */
+}
+
+.Bg-popup {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    background: #313131cc;
+    z-index: 999; /* Adjust the z-index as needed */
+}
+
+.Reg-popup {
+    text-align: center;
+    background: #4bc0c066;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    min-width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -31,7 +31,9 @@ export const Register = (props) => {
     const putMessage = () => {
         if (Status === 'success') {
             return (
-                <p>
+                <div className="Bg">
+                <div className="Bg-popup">
+                <div className="Reg-popup">
                 You have successfully registered!Please Click{' '}
                 <span onClick={() => 
                     {props.onFormSwitch('login');
@@ -39,8 +41,9 @@ export const Register = (props) => {
                     setPass('');}} className="link">
                     here to go to your Dashoard.
                 </span>{' '}
-                
-            </p>
+            </div>
+            </div>
+            </div>
             );
         } else if (Status === 'user-exists') {
             return (

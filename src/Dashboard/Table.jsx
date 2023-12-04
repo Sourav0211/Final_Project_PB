@@ -1,11 +1,16 @@
 // Table.jsx
+import { reload } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
 // import { utils as XLSXUtils, writeFile } from 'xlsx';
 import {utils as XLSXUtils, writeFileXLSX} from 'xlsx';
 
-const Table = ({ tableData, selectedMonth }) => {
+
+
+
+const Table = ({ tableData, selectedMonth ,userUID , setTableData }) => {
   const [showTable, setShowTable] = useState(false);
+
     const handleDownloadExcel = () => {
 
         var wb = XLSXUtils.book_new(),
@@ -14,7 +19,26 @@ const Table = ({ tableData, selectedMonth }) => {
         writeFileXLSX(wb, `UsersData_${selectedMonth}.xlsx`);
       };
     
-         
+      const handleDeleteBudgetItem = async (itemId) => {
+        try {
+          const response = await fetch(`http://localhost:3001/api/budget/${userUID}/${itemId}`, {
+            method: 'DELETE',
+          });
+      
+          if (response.ok) {
+            const updatedTableData = tableData.filter(item => item.id !== itemId);
+            setTableData(updatedTableData);
+            // If the delete request is successful, update the state or refetch data
+            // For example, refetch the data to update the table and chart
+            // fetchDataAndSetChart()
+            
+          } else {
+            console.error('Error deleting budget item');
+          }
+        } catch (error) {
+          console.error('Error deleting budget item:', error);
+        }
+      };
   
     return (  
       <div className='Table-container' >
@@ -40,6 +64,9 @@ const Table = ({ tableData, selectedMonth }) => {
                   <td>{item.category}</td>
                   <td>{item.value}</td>
                   <td>{item.value2}</td>
+                  <td>
+                  <button onClick={() => handleDeleteBudgetItem(item.id)}>Delete</button>
+                 </td>
                 </tr>
               ))}
             </tbody>

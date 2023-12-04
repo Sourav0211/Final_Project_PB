@@ -3,7 +3,7 @@ import React from 'react';
 const MonthDropdown = ({ selectedMonth, onChange }) => {
   return (
     <div>
-      <label>Month</label>
+      {/* <label>Month</label> */}
       <select value={selectedMonth} onChange={(e) => onChange(e.target.value)}>
         <option value="">Select Month</option>
         <option value="January">January</option>
@@ -11,7 +11,7 @@ const MonthDropdown = ({ selectedMonth, onChange }) => {
         <option value="March">March</option>
         <option value="April">April</option>
         <option value="May">May</option>
-        <option value="Jun">Jun</option>
+        <option value="June">June</option>
         <option value="July">July</option>
         <option value="August">August</option>
         <option value="September">September</option>

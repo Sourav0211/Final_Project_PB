@@ -1,6 +1,7 @@
 const express = require('express');
 const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, addDoc, getDocs
+const compression = require('compression');
+const { getFirestore, collection, addDoc, getDocs ,doc,deleteDoc
 ,query,where } = require('@firebase/firestore');
 
 const cors = require('cors');
@@ -22,6 +23,12 @@ const db = getFirestore(appFirebase);
 
 const app = express();
 app.use(cors());
+app.use(compression(
+  {
+    level : 6
+  }
+)); 
+
 const port = 3001;
 
 app.use(express.json());
@@ -80,6 +87,27 @@ app.get('/api/linechart/:userUID', async (req, res) => {
     res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 });
+
+
+// Endpoint to delete a specific budget item
+app.delete('/api/budget/:userUID/:itemId', async (req, res) => {
+  const { userUID, itemId } = req.params;
+  const budgetDocRef = doc(collection(db, "Test", userUID, "Budget"), itemId);
+
+  try {
+    await deleteDoc(budgetDocRef);
+    res.status(200).json({ success: true, message: "Budget item deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+});
+
+
+
+
+
+
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });

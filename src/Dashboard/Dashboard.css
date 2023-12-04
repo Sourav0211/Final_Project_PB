@@ -206,4 +206,46 @@ body.overlay{
     margin-right: 10px;
   }
   
+  .About-Section {
+    margin-top: 20px;
+  }
   
+  .Footer {
+    margin-top:0px;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(60, 153, 147, 0.4);
+  }
+
+  .About-Section {
+    margin-top: 0px;
+    padding: 20px;
+    background-color: #4bc0c066;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .About-Section div {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+  }
+.p strong {
+    font-weight: bold;
+  }
+  
+  .Logo {
+    position: relative;
+    background: url('../Blogo.png') center/cover; /* Adjust the path to your Blogo.png file */
+    height: 300px; /* Set a suitable height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff; /* Set text color */
+    text-align: center;
+  }
+  
+  .Logo h2 {
+    z-index: 1; /* Place the text above the background image */
+    margin: 0;
+  }
