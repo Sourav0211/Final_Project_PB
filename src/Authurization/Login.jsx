@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword,signOut,onAuthStateChanged  } from "firebase
 import './Login.css';
 import Dashboard from "../Dashboard/Dashboard.jsx";
 import Menu from "../Menu/Menu.jsx";
+import axios from 'axios';
 
 export const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -12,27 +13,43 @@ export const Login = (props) => {
     const [tokenExpiration, setTokenExpiration] = useState(null);
     const [status ,setStatus] = useState(null);
 
-    const Login = (e) => {
-       e.preventDefault();
-       signInWithEmailAndPassword(auth, email, pass)
-       .then((userCredential) => {
-        console.log(userCredential);
-        setAuthUser(userCredential.user);
-
-        const expirationTime = new Date().getTime() +  5 * 60 * 1000; // 1 minutes
-        setTokenExpiration(expirationTime);
-
-       }).catch((error) => {
-        console.log(error);
-        if(error.code === 'auth/network-request-failed')
-        {
-            setStatus('Invalid-User');
-        }
-       })
-    }
+    const login = (e) => {
+        e.preventDefault();
+        axios
+          .post('http://localhost:3001/api/login', { email, password: pass })
+          .then((response) => {
+            const { customToken, expirationTime } = response.data;
+            localStorage.setItem('customToken', customToken);
+    
+            signInWithEmailAndPassword(auth, email, pass)
+              .then((userCredential) => {
+                setAuthUser(userCredential.user);
+                // const expirationTime = new Date().getTime() + 2 * 60 * 1000; // 5 minutes
+                setTokenExpiration(expirationTime);
+              })
+              .catch((error) => {
+                console.log('Error signing in:', error);
+                if (error.code === 'auth/network-request-failed') {
+                  // Handle network request failure
+                  console.log('Network request failed');
+                  setStatus('Invalid-User');
+                } else {
+                  // Set status to 'Invalid-User' for other authentication errors
+                  setStatus('Invalid-User');
+                }
+              });
+          })
+          .catch((error) => {
+            console.log('Error during login:', error);
+            if (error.response && error.response.status === 500) {
+              setStatus('Invalid-User');
+            }
+          });
+      };
 
 
     const putMessage = () => {
+        console.log('Status:', status); 
         if (status === 'Invalid-User') {
             return (
                 <p>
@@ -50,7 +67,7 @@ export const Login = (props) => {
             if(user){
                 setAuthUser(user);
 
-            const expirationTime = new Date().getTime() + 5 * 60 * 1000; // 1 minutes 
+            const expirationTime = new Date().getTime() + 10 * 60 * 1000; // 1 minutes 
             setTokenExpiration(expirationTime);
             }
             else{
@@ -112,12 +129,12 @@ export const Login = (props) => {
     return (
         <div className="auth-form-container">
             <h2>Login</h2>
-            <form className="login-form" onSubmit={Login}>
+            <form className="login-form" onSubmit={login}>
                 <label htmlFor="email">email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" />
+                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" autoComplete="current-email"/>
                 
                 <label htmlFor="password">password</label>
-                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+                <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" autoComplete="current-password"/>
                 
                 <button classNAme="login-button" type="submit">Log In</button>
             </form>

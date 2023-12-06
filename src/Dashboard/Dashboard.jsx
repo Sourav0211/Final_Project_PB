@@ -11,6 +11,7 @@ import DoughnutChart from "./Doughnut-Chart.jsx";
 import LineChart from "./LineChart.jsx";
 import CategoryDropdown from "./CategoryDropdown.jsx";
 
+
 const Dashboard = ({ authUser , userSignOut}) => {
 
   const [newCategory, setNewCategory] = useState("");
@@ -24,17 +25,21 @@ const Dashboard = ({ authUser , userSignOut}) => {
   const [showTable, setShowTable] = useState(false);
   const [tableData , setTableData] =useState([]);
   const [showInsights, setShowInsights] = useState(false);
-  const timeoutDuration = 5 * 50 * 1000;
+  const timeoutDuration = 10 * 50 * 1000;
   const userUID = authUser.uid;
+  const [lineChartData, setlineChartData] = useState({});
+  const [doughnutChartData, setDoughnutChartData] = useState({});
+  const [dataEntry, setDataEntry] = useState("")
+  // const [chartOptionsLine, setChartOptionsLine] = useState({});
 
-  const apiUrl = "http://localhost:3001/api/budget";
+  const apiUrl = "http://localhost:3001/api/budget/";
 
 
 //Fecthing data for bar chart
   useEffect(() => {
     const fetchDataAndSetChart = async () => {
       try {
-        const response = await fetch(`${apiUrl}/${userUID}`);
+        const response = await fetch(`http://localhost:3001/api/budget/${userUID}`);
         const data = await response.json();
   
         if (response.ok) {
@@ -65,13 +70,46 @@ const Dashboard = ({ authUser , userSignOut}) => {
 
 
 
+  // for linechart data
+  const fetchLineChartData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/linechart/${userUID}`);
+        const lineChartData = await response.json();
 
+        if (response.ok) {
+          // const { data, options } = prepareLineChartData(lineChartData.data);
+          setlineChartData(lineChartData);
+          // setChartOptionsLine(lineChartData.options);
+        } else {
+          console.error("Error fetching linechart data");
+        }
+      } catch (error) {
+        console.error("Error fetching linechart data:", error);
+      }
+    };
   
-  
-  
-  
+  // for doughnut chart data
+    const fetchDoughnutChartData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3001/api/linechart/${userUID}`);
+        const doughnutChartData = await response.json();
 
+        if (response.ok) {
+          // const { data, options } = prepareDoughnutChartData(doughnutChartData.data);
 
+          setDoughnutChartData(doughnutChartData);
+          // setChartOptionsDoughnut(options);
+        } else {
+          console.error("Error fetching doughnut chart data");
+        }
+      } catch (error) {
+        console.error("Error fetching doughnut chart data:", error);
+      }
+    };
+
+useEffect(()=>{
+  fetchDoughnutChartData();
+},[userUID]);
 
 
 
@@ -104,6 +142,11 @@ const Dashboard = ({ authUser , userSignOut}) => {
         setNewBudget("");
         setNewExpense("");
         setTimeoutPopup(false);
+        // fetchLineChartData();
+        setDataEntry(true);
+        setTimeout(() => {
+          setDataEntry(false);
+        }, 3000);
 
       } else {
         console.error("Error adding budget");
@@ -113,8 +156,12 @@ const Dashboard = ({ authUser , userSignOut}) => {
     }
   };
   
+  useEffect(() => {
+    fetchLineChartData();
+  }, [userUID]);
 
 
+  
   //Creating Bar Chart to Display Input Data 
   const prepareChartData = (data) => {
     if (!Array.isArray(data)) {
@@ -214,7 +261,16 @@ const Dashboard = ({ authUser , userSignOut}) => {
   };
 
 
-
+  const putText= () => {
+   
+    if (dataEntry) {
+        return (
+            <p>
+            New Data added ! Please Update to see the charts!
+            </p>
+        );
+    }
+}
 
   return (
     <div className='Dashboard-Display'>
@@ -248,21 +304,24 @@ const Dashboard = ({ authUser , userSignOut}) => {
 
         <input type="number" placeholder="put your Expense amount" value={newExpense} onChange={(e) => setNewExpense(e.target.value)}></input>
         <button onClick={createBudget}>Enter</button>
-
+       { putText()}
         </div>
 
 
 
 
         <div className='doughnut-chart'>
-          <DoughnutChart userUID={userUID} />
+      
+          <DoughnutChart userUID={userUID} doughnutChartData={doughnutChartData}/>
         </div>
       </div>
   
       {!showInsights ? (
         <div className='insights-section'>
           <div >
-            <LineChart userUID={userUID} />
+          <button onClick={fetchLineChartData}>Update Line Chart</button>
+          <button onClick={fetchDoughnutChartData}>Update Doughnut Chart</button>
+            <LineChart userUID={userUID} lineChartData={lineChartData} />
           </div>
         </div>
       ) : (

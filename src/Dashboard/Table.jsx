@@ -28,8 +28,6 @@ const Table = ({ tableData, selectedMonth ,userUID , setTableData }) => {
           if (response.ok) {
             const updatedTableData = tableData.filter(item => item.id !== itemId);
             setTableData(updatedTableData);
-            // If the delete request is successful, update the state or refetch data
-            // For example, refetch the data to update the table and chart
             // fetchDataAndSetChart()
             
           } else {

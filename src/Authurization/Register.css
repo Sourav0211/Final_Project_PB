@@ -73,7 +73,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Add this to make sure it covers the full height of the viewport */
+    height: 100vh;
 }
 
 .Bg-popup {
@@ -85,7 +85,7 @@
     bottom: 0;
     position: fixed;
     background: #313131cc;
-    z-index: 999; /* Adjust the z-index as needed */
+    z-index: 999;
 }
 
 .Reg-popup {

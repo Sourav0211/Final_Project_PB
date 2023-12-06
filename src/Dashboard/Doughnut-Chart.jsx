@@ -1,38 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-const DoughnutChart = ({ userUID }) => {
+const DoughnutChart = ({ userUID , doughnutChartData}) => {
 
 
-  const [doughnutChartData, setDoughnutChartData] = useState({});
+  const [NdoughnutChartData, setNDoughnutChartData] = useState({});
   const [chartOptionsDoughnut, setChartOptionsDoughnut] = useState({});
 
-  useEffect(() => {
-    const fetchDoughnutChartData = async () => {
-      try {
-        const response = await fetch(`http://localhost:3001/api/linechart/${userUID}`);
-        const doughnutChartData = await response.json();
+  
+    // const fetchNDoughnutChartData = async () => {
+    //   try {
+    //     const response = await fetch(`http://localhost:3001/api/linechart/${userUID}`);
+    //     const NdoughnutChartData = await response.json();
 
-        if (response.ok) {
-          const { data, options } = prepareDoughnutChartData(doughnutChartData.data);
+    //     if (response.ok) {
+    //       const { data, options } = prepareNDoughnutChartData(NdoughnutChartData.data);
 
-          setDoughnutChartData(data);
-          setChartOptionsDoughnut(options);
-        } else {
-          console.error("Error fetching doughnut chart data");
-        }
-      } catch (error) {
-        console.error("Error fetching doughnut chart data:", error);
-      }
-    };
+    //       setNDoughnutChartData(data);
+    //       setChartOptionsDoughnut(options);
+    //     } else {
+    //       console.error("Error fetching doughnut chart data");
+    //     }
+    //   } catch (error) {
+    //     console.error("Error fetching doughnut chart data:", error);
+    //   }
+    // };
 
-    fetchDoughnutChartData();
-  }, [userUID]);
+
+
+
+  useEffect(()=>{
+    if(doughnutChartData && doughnutChartData.data){
+    const {data, options} = prepareNDoughnutChartData(doughnutChartData.data);
+    setNDoughnutChartData(data);
+    setChartOptionsDoughnut(options);
+    
+  }
+  },[doughnutChartData])  
+ 
+  
+ 
 
   
-  const prepareDoughnutChartData = (doughnutChartData) => {
-    // Extract unique categories from doughnutChartData
-    const uniqueCategories = [...new Set(doughnutChartData.map((entry) => entry.category))];
+  const prepareNDoughnutChartData = (NdoughnutChartData) => {
+    // Extract unique categories from NdoughnutChartData
+    const uniqueCategories = [...new Set(NdoughnutChartData.map((entry) => entry.category))];
   
     // Initialize data structure for Doughnut chart
     const data = {
@@ -41,7 +53,7 @@ const DoughnutChart = ({ userUID }) => {
         {
           label: 'Budget',
           data: uniqueCategories.map((category) => {
-            const budgetValue = doughnutChartData
+            const budgetValue = NdoughnutChartData
               .filter((entry) => entry.category === category)
               .reduce((sum, entry) => sum + entry.value, 0);
             return budgetValue;
@@ -62,7 +74,7 @@ const DoughnutChart = ({ userUID }) => {
         {
           label: 'Expense',
           data: uniqueCategories.map((category) => {
-            const expenseValue = doughnutChartData
+            const expenseValue = NdoughnutChartData
               .filter((entry) => entry.category === category)
               .reduce((sum, entry) => sum + entry.value2, 0);
             return expenseValue;
@@ -108,11 +120,11 @@ const DoughnutChart = ({ userUID }) => {
     return { data, options };
   };
   
-
+ 
   return (
     // <div className='doughnut-chart'>
-      doughnutChartData.datasets && doughnutChartData.datasets.length > 0 && (
-        <Doughnut data={doughnutChartData} options={chartOptionsDoughnut} />
+      NdoughnutChartData.datasets && NdoughnutChartData.datasets.length > 0 && (
+        <Doughnut data={NdoughnutChartData} options={chartOptionsDoughnut} />
       )
     // </div>
   );

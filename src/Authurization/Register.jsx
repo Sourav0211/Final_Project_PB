@@ -13,20 +13,31 @@ export const Register = (props) => {
     const handleRegistration = async (e) => {
         e.preventDefault();
         try {
-            await createUserWithEmailAndPassword(auth, email, pass);
-            
+          const response = await fetch('http://localhost:3001/api/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password: pass }),
+          });
+    
+          if (response.ok) {
+            const data = await response.json();
             setStatus('success');
+    
+            // Store the custom token in local storage
+            localStorage.setItem('customToken', data.customToken);
+    
+            // You can also redirect the user or perform other actions as needed
+            // Example: props.history.push('/dashboard');
+          } else {
+            setStatus('user-exists');
+          }
         } catch (error) {
-            console.error(error);
-            if (error.code === 'auth/network-request-failed') {
-          
-                setStatus('user-exists');
-            } else {
-                
-                setStatus('error');
-            }
+          console.error(error);
+          setStatus('user-exists');
         }
-    }
+      };
     
     const putMessage = () => {
         if (Status === 'success') {
@@ -39,7 +50,7 @@ export const Register = (props) => {
                     {props.onFormSwitch('login');
                     setEmail('');
                     setPass('');}} className="link">
-                    here to go to your Dashoard.
+                    here to go to Login page.
                 </span>{' '}
             </div>
             </div>
@@ -68,9 +79,9 @@ export const Register = (props) => {
             <h2>Register</h2>
         <form className="register-form" onSubmit={handleRegistration}>
             <label htmlFor="email">email</label>
-            <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" />
+            <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" autoComplete="current-email"/>
             <label htmlFor="password">password</label>
-            <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+            <input value={pass} onChange={(e) => setPass(e.target.value)} type="password" placeholder="********" id="password" name="password" autoComplete="current-password" />
             <button type="submit">Register</button>
         </form>
         {

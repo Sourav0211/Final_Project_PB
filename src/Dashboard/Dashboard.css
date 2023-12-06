@@ -7,18 +7,18 @@
   .Put-Budget {
     flex: 1;
     border: 1px;
-    border-radius: 10px;
+    
     display: flex;
     flex-direction: column;
-    background-color: #4bc0c066;
-    padding-right: 2rem;
+    background: linear-gradient(to right, #6ae4ff , #aff2ff);
+    padding-right: 15rem;
     padding-left: 2rem;
-    margin-right: 1rem;
   }
   
   .doughnut-chart {
     flex: 1;
-    margin-left: 1rem;
+    background-color: #aff2ff;
+    padding-right: 5rem;
   }
   
   
@@ -91,7 +91,7 @@ body.overlay{
     top: 40%;
     left: 50%; 
     transform: translate(-50%, -50%);
-    background: #4bc0c066;
+    background: #4bb4c066;
     padding-right: 20px;
     padding-left: 20px;
     border-radius: 10px;
@@ -100,36 +100,7 @@ body.overlay{
 }
 
 
-/* .Table-background, .Table-container
-{
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position:fixed;
-}
 
-.Table-container{
-    background: #313131cc;
-}
-
-.Table-content{
-    content: center;
-    margin: center;
-    position: absolute;
-    top: 40%;
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    background: #4bc0c066;
-    padding-right: 20px;
-    padding-left: 20px;
-    border-radius: 10px;
-    max-width: 600px;
-    min-width: 300px;
-}
- */
 
 
 .Table-container {
@@ -214,13 +185,14 @@ body.overlay{
     margin-top:0px;
     text-align: center;
     padding: 20px;
-    background-color: rgba(60, 153, 147, 0.4);
+    background-color: rgb(0, 150, 184);
   }
 
   .About-Section {
+    text-align: justify;
     margin-top: 0px;
     padding: 20px;
-    background-color: #4bc0c066;
+    background-color: #aff2ff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
   }
@@ -236,16 +208,41 @@ body.overlay{
   
   .Logo {
     position: relative;
-    background: url('../Blogo.png') center/cover; /* Adjust the path to your Blogo.png file */
-    height: 300px; /* Set a suitable height */
+    /* background: url('../Blogo.png') center/cover; Adjust the path to your Blogo.png file */
+    height: 150px; /* Set a suitable height */
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff; /* Set text color */
     text-align: center;
+    background: linear-gradient(to right, #aff2ff, #6ae4ff);
+    animation: fadeInLogo 2s ease-in-out;
   }
   
   .Logo h2 {
-    z-index: 1; /* Place the text above the background image */
-    margin: 0;
+    z-index: 1;
+  margin: 0;
+  color: #205142cc;
+  text-align: center;
+  animation: slideInText 2s ease-in-out;
+  font-family: 'YourArtisticFont', Helvetica;
+  }
+  @keyframes fadeInLogo {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInText {
+    from {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
