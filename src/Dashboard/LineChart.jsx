@@ -2,30 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Line } from 'react-chartjs-2';
 
 const LineChart = ({ userUID ,lineChartData }) => {
-  // const [NlineChartData, setNlineChartData] = useState({});
-  // const [NchartOptionsLine, setNChartOptionsLine] = useState({});
-
-  // useEffect(() => {
-    // const fetchNLineChartData = async () => {
-    //   try {
-    //     const response = await fetch(`http://localhost:3001/api/linechart/${userUID}`);
-    //     const NlineChartData = await response.json();
-
-    //     if (response.ok) {
-    //       const { data, options } = prepareNLineChartData(NlineChartData.data);
-    //       setNlineChartData(data);
-    //       setNChartOptionsLine(options);
-    //     } else {
-    //       console.error("Error fetching linechart data");
-    //     }
-    //   } catch (error) {
-    //     console.error("Error fetching linechart data:", error);
-    //   }
-    // };
 
   
-    // fetchNLineChartData();
-  // }, [userUID]);
   const [NlineChartData, setNlineChartData] = useState({});
   const [NchartOptionsLine, setNChartOptionsLine] = useState({});
   
@@ -100,6 +78,7 @@ const LineChart = ({ userUID ,lineChartData }) => {
   return (
     <div>
     <div className='line-chart' >
+      
       {NlineChartData.datasets && NlineChartData.datasets.length > 0 && (
         <Line data={NlineChartData} options={NchartOptionsLine} />
       )}

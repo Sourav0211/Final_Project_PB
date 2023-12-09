@@ -335,16 +335,16 @@ useEffect(()=>{
         </div>
       )}
 
-      <div id="about" className='About-Section'>
-        {/* Content for the About section goes here */}
-        <div>
+<div id="about" class="About-Section">
+    <div>
         <p>The Personal Budget Tracker app is a comprehensive financial management tool designed to help users monitor and analyze their budget and expenses. The app offers four key visualizations to provide users with insightful data:</p>
-        <p>-Doughnut Chart: Displays a summary of total budget and expenses per category.</p>
-        <p>-Line Chart: Illustrates variations in budget and expenses over different months.</p>
-        <p>-Bar Chart:  Highlights variations in budget and expenses for a selected month.</p>
-        <p>-Table: Presents a detailed list of categories, including budget and expense data, for the selected month.Enables users to delete specific categories, offering flexibility in budget adjustments.Includes an option to download the entire category list for the month as an Excel file, enhancing data accessibility and record-keeping.</p>
-        </div>
-      </div>
+        <p><strong>Doughnut Chart:</strong> Displays a summary of total budget and expenses per category.</p>
+        <p><strong>Line Chart:</strong> Illustrates variations in budget and expenses over different months.</p>
+        <p><strong>Bar Chart:</strong> Highlights variations in budget and expenses for a selected month.</p>
+        <p><strong>Table:</strong> Presents a detailed list of categories, including budget and expense data, for the selected month. Enables users to delete specific categories, offering flexibility in budget adjustments. Includes an option to download the entire category list for the month as an Excel file, enhancing data accessibility and record-keeping.</p>
+    </div>
+</div>
+
 
       {/* Footer */}
       <div className='Footer'>

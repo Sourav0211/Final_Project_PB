@@ -3,7 +3,6 @@ import {auth} from "../firebase.js"
 import { signInWithEmailAndPassword,signOut,onAuthStateChanged  } from "firebase/auth";
 import './Login.css';
 import Dashboard from "../Dashboard/Dashboard.jsx";
-import Menu from "../Menu/Menu.jsx";
 import axios from 'axios';
 
 export const Login = (props) => {

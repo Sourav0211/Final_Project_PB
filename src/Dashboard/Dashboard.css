@@ -1,63 +1,41 @@
 
-  
-.Col-View {
+ 
+
+
+  .Col-View {
     display: flex;
-  }
-  
-  .Put-Budget {
+}
+
+.Put-Budget {
     flex: 1;
     border: 1px;
-    
+
     display: flex;
     flex-direction: column;
     background: linear-gradient(to right, #6ae4ff , #aff2ff);
-    padding-right: 15rem;
-    padding-left: 2rem;
-  }
-  
-  .doughnut-chart {
+    padding-right: 15vw;
+    padding-left: 2vw;
+}
+
+.doughnut-chart {
     flex: 1;
     background-color: #aff2ff;
-    padding-right: 5rem;
-  }
-  
-  
-/* .Put-Budget{
-    justify-content: auto;
-    border: 1px ;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    background-color:#4bc0c066;
-    padding-right: 65rem;
-    padding-left: 2rem;
-    margin: auto;
-    
-} */
+    padding-right: 5vw;
+}
 
-.bar-chart
-{
+.bar-chart {
     margin-bottom: 0px;
-    margin-right: 80px;
-    margin-left: 80px;
-    /* justify-content: left;
-    padding-bottom: 1rem;
-    padding-right: 5rem;
-    padding-left: 5rem;
-    */
+    margin-right: 5vw;
+    margin-left: 5vw;
 }
 
-.line-chart{
-    margin-bottom: 80px;
-    margin-right: 80px;
-    margin-left: 80px;
-    /* justify-content: left;
-    padding-bottom: 20rem;
-    padding-right: 5rem;
-    padding-left: 5rem; */
+.line-chart {
+    margin-bottom: 5vh;
+    margin-right: 5vw;
+    margin-left: 5vw;
 }
 
-body.overlay{
+body.overlay {
     background: #989898;
     width: 100vw;
     height: 100vh;
@@ -68,68 +46,61 @@ body.overlay{
     position: fixed;
 }
 
-
-.bgpopup, .popup
-{
+.bgpopup, .popup {
     width: 100vw;
     height: 100vh;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    position:fixed;
+    position: fixed;
 }
 
-.popup{
+.popup {
     background: #313131cc;
 }
 
-.popup-content{
+.popup-content {
     content: center;
     margin: center;
     position: absolute;
     top: 40%;
-    left: 50%; 
+    left: 50%;
     transform: translate(-50%, -50%);
     background: #4bb4c066;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 5vw;
+    padding-left: 5vw;
     border-radius: 10px;
     max-width: 600px;
     min-width: 300px;
 }
-
-
-
-
 
 .Table-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 50vh;
-    background: rgba(185, 255, 255, 0.8) ;
+    background: rgba(185, 255, 255, 0.8);
 }
 
 .Table-content {
-    background: #fff; /* Set a background color for the content */
-    padding: 20px;
+    background: #fff;
+    padding: 2vw;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(116, 116, 116, 0.2); /* Add a subtle box shadow */
+    box-shadow: 0 0 10px rgba(116, 116, 116, 0.2);
     max-width: 600px;
     width: 100%;
     text-align: center;
 }
 
-/* Style for the table inside the content */
 .Table-content table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 2vh;
 }
 
 .Table-content th, .Table-content td {
-    padding: 10px;
+    padding: 1vw;
     border: 1px solid #ddd;
 }
 
@@ -142,15 +113,14 @@ body.overlay{
     background-color: #f9f9f9;
 }
 
-/* Style for the button */
 .Table-content button {
     background-color: #4bc0c0;
     color: #fff;
-    padding: 10px;
+    padding: 1vw;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 2vh;
 }
 
 .Table-content button:hover {
@@ -158,91 +128,114 @@ body.overlay{
 }
 
 .Expense-Months {
-    display:flex  ;
+    justify-content: center; 
+    align-items: center;
+    display: flex;
     text-align: center;
-    background-color: #ffe6e6; 
-    border: 1px solid #ff3333; 
-    padding: 10px; 
-    margin-bottom: 20px; 
-    border-radius: 20px; 
-    font-size: 20px; 
-    color: #ff3333; /* Dark red text color */
-    
+    background-color: #ffe6e6;
+    border: 1px solid #ff3333;
+    padding: 1vw;
+    margin-bottom: 2vh;
+    border-radius: 2vw;
+    font-size: 2vh;
+    color: #ff3333;
+}
 
-  }
-  .Expense-Months div {
-    margin-left: 460px;
+.Expense-Months div {
+    margin-left: 20vw;
     text-align: center;
-    font-weight: bold; 
-    margin-right: 10px;
-  }
-  
-  .About-Section {
-    margin-top: 20px;
-  }
-  
-  .Footer {
-    margin-top:0px;
-    text-align: center;
-    padding: 20px;
-    background-color: rgb(0, 150, 184);
-  }
-
-  .About-Section {
-    text-align: justify;
-    margin-top: 0px;
-    padding: 20px;
-    background-color: #aff2ff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .About-Section div {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #333;
-  }
-.p strong {
     font-weight: bold;
-  }
-  
-  .Logo {
+    margin-right: 20vw;
+}
+
+.About-Section {
+    margin-top: 2vh;
+}
+
+.Footer {
+    margin-top: 0px;
+    text-align: center;
+    padding: 2vw;
+    background-color: rgb(0, 150, 184);
+}
+
+.About-Section {
+  text-align: justify;
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: #6ae4ff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.About-Section div {
+  font-size: 1rem;
+  line-height: 1;
+  color: #333;
+}
+
+.About-Section strong {
+  color: #205142;
+  font-weight: bold;
+}
+
+.About-Section p {
+  margin-bottom: 1rem;
+}
+
+
+.Logo {
     position: relative;
-    /* background: url('../Blogo.png') center/cover; Adjust the path to your Blogo.png file */
-    height: 150px; /* Set a suitable height */
+    height: 15vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff; /* Set text color */
+    color: #fff;
     text-align: center;
     background: linear-gradient(to right, #aff2ff, #6ae4ff);
     animation: fadeInLogo 2s ease-in-out;
-  }
-  
-  .Logo h2 {
+}
+
+.Logo h2 {
     z-index: 1;
-  margin: 0;
-  color: #205142cc;
-  text-align: center;
-  animation: slideInText 2s ease-in-out;
-  font-family: 'YourArtisticFont', Helvetica;
-  }
-  @keyframes fadeInLogo {
+    margin: 0;
+    color: #205142cc;
+    text-align: center;
+    animation: slideInText 2s ease-in-out;
+    font-family: 'YourArtisticFont', Helvetica;
+}
+
+@keyframes fadeInLogo {
     from {
-      opacity: 0;
+        opacity: 0;
     }
     to {
-      opacity: 1;
+        opacity: 1;
     }
-  }
-  
-  @keyframes slideInText {
+}
+
+@keyframes slideInText {
     from {
-      transform: translateY(-20px);
-      opacity: 0;
+        transform: translateY(-2vw);
+        opacity: 0;
     }
     to {
-      transform: translateY(0);
-      opacity: 1;
+        transform: translateY(0);
+        opacity: 1;
     }
-  }
+}
+.insights-section button {
+  background-color: #6ae4ff;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 2vh;
+}
+
+.insights-section button:hover {
+  background-color: #007575;
+}
