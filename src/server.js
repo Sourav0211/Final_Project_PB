@@ -7,9 +7,10 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const cache = require('memory-cache');
 const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
+const path = require('path');
 
 // const _ = require('lodash'); 
-
+app.use(express.static(path.join(__dirname,'/src/build')));
 
 
 const firebaseConfig = {
