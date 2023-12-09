@@ -15,7 +15,7 @@ export const Login = (props) => {
     const login = (e) => {
         e.preventDefault();
         axios
-          .post('http://localhost:3001/api/login', { email, password: pass })
+          .post('/api/login', { email, password: pass })
           .then((response) => {
             const { customToken, expirationTime } = response.data;
             localStorage.setItem('customToken', customToken);

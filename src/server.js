@@ -37,7 +37,12 @@ const db = getFirestore(appFirebase);
 const auth = getAuth(appFirebase); //
 
 const app = express();
-app.use(cors());
+
+
+
+
+
+
 app.use(compression(
   {
     level : 6
@@ -59,6 +64,12 @@ const cacheMiddleware = (req, res, next) => {
 };
 
 app.use(express.json());
+
+
+// app.get('/' , (req ,res)=>{
+
+// });
+app.use(express.static('build'))
 
 // Endpoint to add a new budget
 app.post('/api/budget', async (req, res) => {
