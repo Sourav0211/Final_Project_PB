@@ -10,7 +10,6 @@ const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 const path = require('path');
 
 // const _ = require('lodash'); 
-app.use(express.static(path.join(__dirname,'/src/build')));
 
 
 const firebaseConfig = {
@@ -66,11 +65,7 @@ const cacheMiddleware = (req, res, next) => {
 
 app.use(express.json());
 
-
-// app.get('/' , (req ,res)=>{
-
-// });
-app.use(express.static('build'))
+app.use(cors());
 
 // Endpoint to add a new budget
 app.post('/api/budget', async (req, res) => {

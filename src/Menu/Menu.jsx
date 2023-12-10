@@ -11,7 +11,7 @@ function Menu( {userSignOut , showInsights}) {
               <li><a href="/">Home</a></li>
               <li> <a href="#about">About</a> </li>
               <li onClick={showInsights}>Insights</li>
-              <a href="#" onClick={userSignOut} id='navbutton'>Sign Out</a>
+              <a href="/" onClick={userSignOut} id='navbutton'>Sign Out</a>
           </ul>
       </nav>
     );
