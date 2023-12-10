@@ -9,6 +9,11 @@ const cache = require('memory-cache');
 const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 const path = require('path');
 
+app.use(cors({
+  origin: 'http://167.99.56.233:3000', // or '*' for any origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
 // const _ = require('lodash'); 
 
 
@@ -65,7 +70,8 @@ const cacheMiddleware = (req, res, next) => {
 
 app.use(express.json());
 
-app.use(cors());
+
+
 
 // Endpoint to add a new budget
 app.post('/api/budget', async (req, res) => {
@@ -156,7 +162,9 @@ app.post('/api/login', async (req, res) => {
   try {
     // Assuming successful validation, create a custom JWT token
     const customToken = jwt.sign({ email }, 'your-secret-key', { expiresIn: '1m' });
-
+    res.header('Access-Control-Allow-Origin', 'http://167.99.56.233:3000');
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.header('Access-Control-Allow-Credentials', 'true');
     res.status(200).json({ success: true, customToken });
   } catch (error) {
     console.error(error);
