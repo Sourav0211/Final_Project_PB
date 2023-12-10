@@ -9,8 +9,8 @@ const cache = require('memory-cache');
 const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 const path = require('path');
 
-app.use(cors());
-app.options('/api/login', cors());
+// app.use(cors());
+// app.options('/api/login', cors());
 // const _ = require('lodash'); 
 
 
@@ -41,7 +41,9 @@ const auth = getAuth(appFirebase); //
 const app = express();
 
 
-
+app.get('/' , (req,res) => {
+  //my reat app;
+})
 
 
 
@@ -190,5 +192,5 @@ app.post('/api/register', async (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`Server is running at http://167.99.56.233:${port}`);
+  console.log(`Server is running at http://localhost:${port}`);
 });

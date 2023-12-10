@@ -73,7 +73,7 @@ const Dashboard = ({ authUser , userSignOut}) => {
   // for linechart data
   const fetchLineChartData = async () => {
       try {
-        const response = await fetch(`http://167.99.56.233/api/linechart/${userUID}`);
+        const response = await fetch(`/api/linechart/${userUID}`);
         const lineChartData = await response.json();
 
         if (response.ok) {
@@ -91,7 +91,7 @@ const Dashboard = ({ authUser , userSignOut}) => {
   // for doughnut chart data
     const fetchDoughnutChartData = async () => {
       try {
-        const response = await fetch(`http://167.99.56.233/api/linechart/${userUID}`);
+        const response = await fetch(`/api/linechart/${userUID}`);
         const doughnutChartData = await response.json();
 
         if (response.ok) {
@@ -123,7 +123,7 @@ useEffect(()=>{
         return;
       }
   
-      const response = await fetch('http://167.99.56.233/api/budget/', {
+      const response = await fetch('/api/budget/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -201,7 +201,7 @@ useEffect(()=>{
 
   const handleDeleteBudgetItem = async (itemId) => {
     try {
-      const response = await fetch(`http://167.99.56.233/api/budget/${userUID}/${itemId}`, {
+      const response = await fetch(`/api/budget/${userUID}/${itemId}`, {
         method: 'DELETE',
       });
   
