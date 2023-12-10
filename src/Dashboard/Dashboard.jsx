@@ -25,7 +25,7 @@ const Dashboard = ({ authUser , userSignOut}) => {
   const [showTable, setShowTable] = useState(false);
   const [tableData , setTableData] =useState([]);
   const [showInsights, setShowInsights] = useState(false);
-  const timeoutDuration = 1 * 60 * 1000;
+  const timeoutDuration = 1 * 50 * 1000;
   const userUID = authUser.uid;
   const [lineChartData, setlineChartData] = useState({});
   const [doughnutChartData, setDoughnutChartData] = useState({});
@@ -242,7 +242,7 @@ useEffect(()=>{
 
 
   const handleReloadSession = () => {
-    // Reload the session or perform any other necessary actions
+    // Reload the session or perform
     window.location.reload();
   };
 

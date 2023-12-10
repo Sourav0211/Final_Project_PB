@@ -90,25 +90,23 @@ export const Login = (props) => {
 
 /*setting session time for 1 min*/
     const checkTokenExpiration = () => {
-        if (authUser && tokenExpiration) {
-          const currentTimestamp = new Date().getTime();
-          if (currentTimestamp > tokenExpiration) {
-            // Token has expired, sign out the user or take appropriate action
-            console.log("Token has expired");
-            userSignOut();
-          }
+      if (authUser && tokenExpiration) {
+        const currentTimestamp = new Date().getTime();
+        if (currentTimestamp > tokenExpiration) {
+          // Token has expired, sign out the user or take appropriate action
+          console.log("Token has expired");
+          userSignOut();
         }
-      };
-    
-      useEffect(() => {
-        const interval = setInterval(() => {
-          checkTokenExpiration();
-        }, 1000); // Check token expiration every second
-    
-        return () => clearInterval(interval);
-      }, [authUser, tokenExpiration]);
+      }
+    };
 
+    useEffect(() => {
+      const interval = setInterval(() => {
+        checkTokenExpiration();
+      }, 1000); // Check token expiration every second
 
+      return () => clearInterval(interval);
+    }, [authUser, tokenExpiration]);
 
 
 

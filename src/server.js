@@ -173,15 +173,15 @@ app.post('/api/register', async (req, res) => {
 
   try {
     // Create a new user in Firebase Authentication
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    // const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-    // Assuming successful registration, create a custom JWT token
-    const customToken = jwt.sign({ email, uid: userCredential.user.uid }, 'your-secret-key', { expiresIn: '1m' });
+    // Assuming successful registration, create a custom JWT token uid: userCredential.user.uid
+    const customToken = jwt.sign({ email }, 'your-secret-key', { expiresIn: '1m' });
 
     res.status(201).json({ success: true, customToken });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, error: 'Internal Server Error' });
+    res.status(500).json({ success: false, error: 'Internal Server Error', details: error.message });
   }
 });
 

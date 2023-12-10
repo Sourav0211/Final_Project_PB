@@ -110,30 +110,36 @@ export const Register = (props) => {
 
     const handleRegistration = async (e) => {
         e.preventDefault();
+    
         try {
             const response = await axios.post('/api/register', {
                 email,
-                password: pass,
+                password: pass
             });
-
-            if (response.status === 201) {
-                const data = response.data;
-                setStatus('success');
-
-                // Store the custom token in local storage
-                localStorage.setItem('customToken', data.customToken);
-
-                // You can also redirect the user or perform other actions as needed
-                // Example: props.history.push('/dashboard');
-            } else {
-                setStatus('user-exists');
-            }
+    
+            const { customToken, expirationTime } = response.data;
+            localStorage.setItem('customToken', customToken);
+    
+            // You can also redirect the user or perform other actions as needed
+            // Example: props.history.push('/dashboard');
+            
+            createUserWithEmailAndPassword(auth, email, pass)
+                .then(() => {
+                    // setAuthUser(userCredential.user);
+                    // const expirationTime = new Date().getTime() + 2 * 60 * 1000; // 5 minutes
+                    // setTokenExpiration(expirationTime);
+                    setStatus('success')
+                })
+                .catch((error) => {
+                    console.log('Error signing in:', error);
+                    setStatus('Invalid-User');
+                });
         } catch (error) {
             console.error(error.response.data);
             setStatus('user-exists');
         }
     };
-
+    
     const putMessage = () => {
         if (Status === 'success') {
             return (
@@ -145,7 +151,7 @@ export const Register = (props) => {
                                 {props.onFormSwitch('login');
                                 setEmail('');
                                 setPass('');}} className="link">
-                                here to go to Login page.
+                                here to go to Your Dashboard page.
                             </span>{' '}
                         </div>
                     </div>
