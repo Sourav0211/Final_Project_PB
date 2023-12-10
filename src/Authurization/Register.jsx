@@ -129,7 +129,7 @@ export const Register = (props) => {
                 setStatus('user-exists');
             }
         } catch (error) {
-            console.error(error);
+            console.error(error.response.data);
             setStatus('user-exists');
         }
     };

@@ -157,9 +157,6 @@ app.delete('/api/budget/:userUID/:itemId', async (req, res) => {
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
-  // Verify user credentials or perform any necessary checks
-  // For example, you might want to validate the email and password format
-
   try {
     // Assuming successful validation, create a custom JWT token
     const customToken = jwt.sign({ email }, 'your-secret-key', { expiresIn: '1m' });

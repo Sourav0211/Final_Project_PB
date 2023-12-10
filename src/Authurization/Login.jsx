@@ -48,7 +48,7 @@ export const Login = (props) => {
 
 
     const putMessage = () => {
-        console.log('Status:', status); 
+        // console.log('Status:', status); 
         if (status === 'Invalid-User') {
             return (
                 <p>
@@ -66,7 +66,7 @@ export const Login = (props) => {
             if(user){
                 setAuthUser(user);
 
-            const expirationTime = new Date().getTime() + 10 * 60 * 1000; // 1 minutes 
+            const expirationTime = new Date().getTime() + 1 * 60 * 1000; // 1 minutes 
             setTokenExpiration(expirationTime);
             }
             else{
