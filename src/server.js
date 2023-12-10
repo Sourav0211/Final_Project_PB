@@ -41,11 +41,11 @@ const auth = getAuth(appFirebase); //
 const app = express();
 
 
-app.get('/' , (req,res) => {
-  //my reat app;
-})
+// app.get('/' , (req,res) => {
+//   //my reat app;
+// })
 
-
+app.use(express.static('build'))
 
 app.use(compression(
   {

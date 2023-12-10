@@ -39,7 +39,7 @@ const Dashboard = ({ authUser , userSignOut}) => {
   useEffect(() => {
     const fetchDataAndSetChart = async () => {
       try {
-        const response = await fetch(`http://167.99.56.233/api/budget/${userUID}`);
+        const response = await fetch(`/api/budget/${userUID}`);
         const data = await response.json();
   
         if (response.ok) {
