@@ -25,7 +25,7 @@ const Dashboard = ({ authUser , userSignOut}) => {
   const [showTable, setShowTable] = useState(false);
   const [tableData , setTableData] =useState([]);
   const [showInsights, setShowInsights] = useState(false);
-  const timeoutDuration = 10 * 50 * 1000;
+  const timeoutDuration = 1 * 60 * 1000;
   const userUID = authUser.uid;
   const [lineChartData, setlineChartData] = useState({});
   const [doughnutChartData, setDoughnutChartData] = useState({});
