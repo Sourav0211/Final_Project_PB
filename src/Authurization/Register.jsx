@@ -13,7 +13,7 @@ export const Register = (props) => {
     const handleRegistration = async (e) => {
         e.preventDefault();
         try {
-          const response = await fetch('http://localhost:3001/api/register', {
+          const response = await fetch('http://167.99.56.233/api/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

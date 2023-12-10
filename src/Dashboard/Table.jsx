@@ -21,7 +21,7 @@ const Table = ({ tableData, selectedMonth ,userUID , setTableData }) => {
     
       const handleDeleteBudgetItem = async (itemId) => {
         try {
-          const response = await fetch(`http://localhost:3001/api/budget/${userUID}/${itemId}`, {
+          const response = await fetch(`http://167.99.56.233/api/budget/${userUID}/${itemId}`, {
             method: 'DELETE',
           });
       
