@@ -57,7 +57,7 @@ const LineChart = ({ userUID ,lineChartData }) => {
               position: 'left',
               title: {
                 display: true,
-                // text: 'Amount',
+              
               },
             },
           },
@@ -90,7 +90,6 @@ const LineChart = ({ userUID ,lineChartData }) => {
             const totalBudget = NlineChartData.datasets[0].data[index];
             const totalExpense = NlineChartData.datasets[1].data[index];
 
-            // Check if total expense is greater than total budget
             if (totalExpense > totalBudget) {
               return (
                 <div key={month}> You are spending ${totalExpense - totalBudget} more than the total budget for {month}</div>);

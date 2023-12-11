@@ -9,16 +9,13 @@ jest.mock('axios');
 
 describe('Login', () => {
   it('triggers onFormSwitch with "register" argument when button is clicked', () => {
-    const onFormSwitchMock = jest.fn(); // Mock the onFormSwitch function
+    const onFormSwitchMock = jest.fn(); 
 
     render(<Login onFormSwitch={onFormSwitchMock} />);
-
-    // Use getByRole to select the button by its role
     const button = screen.getByRole('button', { name: /register/i });
 
     fireEvent.click(button);
 
-    // Check if onFormSwitch was called with the correct argument
     expect(onFormSwitchMock).toHaveBeenCalledWith('register');
   });
 });

@@ -6,11 +6,11 @@ jest.mock('../Dashboard/Dashboard.css', () => ({}));
 jest.mock('../Menu/Menu.css', () => ({}));
 jest.mock('axios');
 
-// Mock the fetch function
+
 global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
-    json: () => Promise.resolve({ data: [] }), // Adjust the response as needed
+    json: () => Promise.resolve({ data: [] }), 
   })
 );
 
@@ -55,16 +55,13 @@ describe('Dashboard Component', () => {
         }),
       });
   
-      // Verify that setTimeout was called
+      
       expect(setTimeout).toHaveBeenCalledWith(expect.any(Function), 3000);
   
-      // Verify that the message is displayed
+  
       expect(screen.getByText(/new data added/i)).toBeInTheDocument();
   
-      // Verify that userSignOut was not called
       expect(mockUserSignOut).not.toHaveBeenCalled();
-  
-      // Clean up the fake timers
       jest.useRealTimers();
     });
   });

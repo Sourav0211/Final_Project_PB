@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { Bar , Line } from 'react-chartjs-2'; // Import Bar from react-chartjs-2
+import { Bar , Line } from 'react-chartjs-2';
 import './Dashboard.css';
 import Menu from "../Menu/Menu.jsx";
 import Popup from "./Popup";
@@ -30,9 +30,6 @@ const Dashboard = ({ authUser , userSignOut}) => {
   const [lineChartData, setlineChartData] = useState({});
   const [doughnutChartData, setDoughnutChartData] = useState({});
   const [dataEntry, setDataEntry] = useState("")
-  // const [chartOptionsLine, setChartOptionsLine] = useState({});
-
-  // const apiUrl = "http://localhost:3001/api/budget/";
 
 
 //Fecthing data for bar chart
@@ -77,9 +74,9 @@ const Dashboard = ({ authUser , userSignOut}) => {
         const lineChartData = await response.json();
 
         if (response.ok) {
-          // const { data, options } = prepareLineChartData(lineChartData.data);
+          
           setlineChartData(lineChartData);
-          // setChartOptionsLine(lineChartData.options);
+        
         } else {
           console.error("Error fetching linechart data");
         }
@@ -95,10 +92,8 @@ const Dashboard = ({ authUser , userSignOut}) => {
         const doughnutChartData = await response.json();
 
         if (response.ok) {
-          // const { data, options } = prepareDoughnutChartData(doughnutChartData.data);
 
           setDoughnutChartData(doughnutChartData);
-          // setChartOptionsDoughnut(options);
         } else {
           console.error("Error fetching doughnut chart data");
         }
@@ -117,7 +112,6 @@ useEffect(()=>{
 
   const createBudget = async () => {
     try {
-      // Validate that required fields are not empty
       if (!month || !newCategory || !newBudget || !newExpense) {
         console.error("Please fill in all required fields");
         return;
@@ -142,7 +136,6 @@ useEffect(()=>{
         setNewBudget("");
         setNewExpense("");
         setTimeoutPopup(false);
-        // fetchLineChartData();
         setDataEntry(true);
         setTimeout(() => {
           setDataEntry(false);
@@ -208,9 +201,6 @@ useEffect(()=>{
       if (response.ok) {
         const updatedTableData = tableData.filter(item => item.id !== itemId);
         setTableData(updatedTableData);
-        // If the delete request is successful, update the state or refetch data
-        // For example, refetch the data to update the table and chart
-        // fetchDataAndSetChart();
         if (setChartData) {
           const filteredChartData = updatedTableData.filter(item => item.month === selectedMonth);
           const newChartData = prepareChartData(filteredChartData);
@@ -233,7 +223,6 @@ useEffect(()=>{
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      // Show the popup before the session times out
       setTimeoutPopup(true);
     }, timeoutDuration);
 
@@ -242,17 +231,12 @@ useEffect(()=>{
 
 
   const handleReloadSession = () => {
-    // Reload the session or perform
     window.location.reload();
   };
 
 // for table
   const toggleTable = () => {
     setShowTable(!showTable);
-    // Fetch and set the table data when showing the table
-    // if (!showTable) {
-    //   createBudget();
-    // }
   };  
 
 // for Insights
@@ -291,11 +275,9 @@ useEffect(()=>{
         <div className='Put-Budget'>
         <label>Month</label>
 
-        {/* <input placeholder="Put Month eg.January,February" value={month} onChange={(e) => setMonth(e.target.value)}></input> */}
         <MonthDropdown selectedMonth={month} onChange={setMonth} />
         <label>Category</label>
 
-        {/* <input placeholder="put your category" value={newCategory} onChange={(e) => setNewCategory(e.target.value)}></input> */}
         <CategoryDropdown selectedCategory= {newCategory} onChange = {setNewCategory}/>
         <label>Budget</label>
 

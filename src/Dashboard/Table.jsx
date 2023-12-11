@@ -1,8 +1,7 @@
-// Table.jsx
+
 import { reload } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
-// import { utils as XLSXUtils, writeFile } from 'xlsx';
 import {utils as XLSXUtils, writeFileXLSX} from 'xlsx';
 
 
@@ -28,7 +27,7 @@ const Table = ({ tableData, selectedMonth ,userUID , setTableData }) => {
           if (response.ok) {
             const updatedTableData = tableData.filter(item => item.id !== itemId);
             setTableData(updatedTableData);
-            // fetchDataAndSetChart()
+           
             
           } else {
             console.error('Error deleting budget item');

@@ -119,20 +119,15 @@ export const Register = (props) => {
     
             const { customToken, expirationTime } = response.data;
             localStorage.setItem('customToken', customToken);
-    
-            // You can also redirect the user or perform other actions as needed
-            // Example: props.history.push('/dashboard');
             
             createUserWithEmailAndPassword(auth, email, pass)
                 .then(() => {
-                    // setAuthUser(userCredential.user);
-                    // const expirationTime = new Date().getTime() + 2 * 60 * 1000; // 5 minutes
-                    // setTokenExpiration(expirationTime);
                     setStatus('success')
                 })
                 .catch((error) => {
                     console.log('Error signing in:', error);
-                    setStatus('Invalid-User');
+                    if(error.code === 'auth/network-request-failed')
+                    setStatus('user-exists');
                 });
         } catch (error) {
             console.error(error.response.data);

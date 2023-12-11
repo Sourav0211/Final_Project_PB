@@ -7,25 +7,6 @@ const DoughnutChart = ({ userUID , doughnutChartData}) => {
   const [NdoughnutChartData, setNDoughnutChartData] = useState({});
   const [chartOptionsDoughnut, setChartOptionsDoughnut] = useState({});
 
-  
-    // const fetchNDoughnutChartData = async () => {
-    //   try {
-    //     const response = await fetch(`http://localhost:3001/api/linechart/${userUID}`);
-    //     const NdoughnutChartData = await response.json();
-
-    //     if (response.ok) {
-    //       const { data, options } = prepareNDoughnutChartData(NdoughnutChartData.data);
-
-    //       setNDoughnutChartData(data);
-    //       setChartOptionsDoughnut(options);
-    //     } else {
-    //       console.error("Error fetching doughnut chart data");
-    //     }
-    //   } catch (error) {
-    //     console.error("Error fetching doughnut chart data:", error);
-    //   }
-    // };
-
 
 
 
@@ -43,10 +24,9 @@ const DoughnutChart = ({ userUID , doughnutChartData}) => {
 
   
   const prepareNDoughnutChartData = (NdoughnutChartData) => {
-    // Extract unique categories from NdoughnutChartData
+
     const uniqueCategories = [...new Set(NdoughnutChartData.map((entry) => entry.category))];
   
-    // Initialize data structure for Doughnut chart
     const data = {
       labels: uniqueCategories,
       datasets: [
@@ -62,13 +42,13 @@ const DoughnutChart = ({ userUID , doughnutChartData}) => {
             '#FF6384',
             '#36A2EB',
             '#FFCE56',
-            // Add more colors as needed
+         
           ],
           hoverBackgroundColor: [
             '#FF6384',
             '#36A2EB',
             '#FFCE56',
-            // Add more colors as needed
+          
           ],
         },
         {
@@ -108,7 +88,6 @@ const DoughnutChart = ({ userUID , doughnutChartData}) => {
       ],
     };
   
-    // Set options for the Doughnut chart
     const options = {
       maintainAspectRatio: false, 
     responsive: true, 
@@ -122,11 +101,10 @@ const DoughnutChart = ({ userUID , doughnutChartData}) => {
   
  
   return (
-    // <div className='doughnut-chart'>
       NdoughnutChartData.datasets && NdoughnutChartData.datasets.length > 0 && (
         <Doughnut data={NdoughnutChartData} options={chartOptionsDoughnut} />
       )
-    // </div>
+   
   );
 };
 
