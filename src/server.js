@@ -9,10 +9,6 @@ const cache = require('memory-cache');
 const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 const path = require('path');
 
-// app.use(cors());
-// app.options('/api/login', cors());
-// const _ = require('lodash'); 
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyB2_ux1kEP4K4j2p-TjR9_yOm_H6Zcuh_E",
@@ -23,32 +19,17 @@ const firebaseConfig = {
   appId: "1:601586725418:web:7795257868ff5a74824953",
   measurementId: "G-P42CDK9XQK"
 };
-// const firebaseConfig = {
-//   apiKey: "AIzaSyB2_ux1kEP4K4j2p-TjR9_yOm_H6Zcuh_E",
-//   authDomain: "my-budget-react.firebaseapp.com",
-//   projectId: "my-budget-react",
-//   storageBucket: "my-budget-react.appspot.com",
-//   messagingSenderId: "601586725418",
-//   appId: "1:601586725418:web:7795257868ff5a74824953",
-//   measurementId: "G-P42CDK9XQK"
-// };
 
 
 const appFirebase = initializeApp(firebaseConfig);
 const db = getFirestore(appFirebase);
-const auth = getAuth(appFirebase); //
+const auth = getAuth(appFirebase); 
 
 const app = express();
 
-
 app.use(express.static('build'));
 
-// Serve 'index.html' for all other routes
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
-
-
+// To compress the json response
 app.use(compression(
   {
     level : 6
@@ -158,7 +139,6 @@ app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Assuming successful validation, create a custom JWT token
     const customToken = jwt.sign({ email }, 'your-secret-key', { expiresIn: '1m' });
     
     res.status(200).json({ success: true, customToken });
@@ -172,10 +152,6 @@ app.post('/api/register', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Create a new user in Firebase Authentication
-    // const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-    // Assuming successful registration, create a custom JWT token uid: userCredential.user.uid
     const customToken = jwt.sign({ email }, 'your-secret-key', { expiresIn: '1m' });
 
     res.status(201).json({ success: true, customToken });
@@ -184,9 +160,6 @@ app.post('/api/register', async (req, res) => {
     res.status(500).json({ success: false, error: 'Internal Server Error', details: error.message });
   }
 });
-
-
-
 
 
 
